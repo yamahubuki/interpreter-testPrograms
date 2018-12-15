@@ -11,5 +11,5 @@ ELSE
 ENDIF
 
 z = 100
-print(a)
+print a
 END

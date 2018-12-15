@@ -1,4 +1,4 @@
 a = 1.6 * 2
-print(a)
+print a
 
 END

@@ -4,6 +4,6 @@ DO
 	b = 0
 LOOP WHILE a < 20
 
-print(a)
+print a
 
 END
