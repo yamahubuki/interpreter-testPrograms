@@ -1,4 +1,5 @@
 FOR i = 0 TO 3
-	print("Hello")
+	a="Hello World"
+	PRINT a
 NEXT i
 END
