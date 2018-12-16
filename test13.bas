@@ -8,6 +8,6 @@ ELSE
 	c = 50
 ENDIF
 
-print a
+PRINT a
 
 END

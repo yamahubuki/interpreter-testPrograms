@@ -1,4 +1,4 @@
 a = 6 / 1.2
-print a
+PRINT a
 
 END

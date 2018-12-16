@@ -3,14 +3,14 @@ b = 2.3
 c = "‚ ‚¢‚¤‚¦‚¨"
 d = a
 
-print a
-print "\n"
-print b
-print "\n"
-print c
-print "\n"
-print d
-print "\n"
+PRINT a
+PRINT "\n"
+PRINT b
+PRINT "\n"
+PRINT c
+PRINT "\n"
+PRINT d
+PRINT "\n"
 
 
 

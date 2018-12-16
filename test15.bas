@@ -2,10 +2,10 @@ a = 0
 
 WHILE a < 5
 
-	print a
+	PRINT a
 	a=a+1
 
 WEND
-print "END!"
+PRINT "END!"
 
 END

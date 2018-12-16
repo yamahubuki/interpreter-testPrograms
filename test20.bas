@@ -4,6 +4,6 @@ DO
 	b = 0
 LOOP UNTIL a > 20
 
-print a
+PRINT a
 
 END
