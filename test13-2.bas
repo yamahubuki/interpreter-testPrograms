@@ -1,5 +1,5 @@
 a = 0
-if a >= 0 THEN
+if a <= 0 THEN
 	a = 10
 	b = 20
 ELSE
