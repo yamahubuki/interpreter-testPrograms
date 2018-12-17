@@ -1,5 +1,5 @@
 a = 10
-DO WHILE a < 20
+DO WHILE a < 10
 	a = a + 1
 	b = 0
 LOOP
