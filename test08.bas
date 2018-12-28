@@ -1,2 +1,2 @@
-a = myFunction(subfunction(a),1,2.25)
+a = myFunction(subfunction(a))
 END
