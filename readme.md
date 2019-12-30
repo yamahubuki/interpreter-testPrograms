@@ -8,7 +8,7 @@
 - 一応テスト目安を示しますが、テストプログラム、正常動作結果共に正確性・網羅性を保証するものではありません。
 - 不足や間違いがあれば、皆様からのPullRequestを歓迎します。
 - 随時更新し、以下で配布します。
-	- https://github.com/Yuki-Kochi/interpreter-testPrograms
+	- https://github.com/yamahubuki/interpreter-testPrograms
 
 ## 使い方
 
