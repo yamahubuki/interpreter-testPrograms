@@ -3,6 +3,6 @@ DO WHILE a < 10
 	a = a + 1
 	b = 0
 LOOP
-PRINT a
+PRINT(a)
 
 END

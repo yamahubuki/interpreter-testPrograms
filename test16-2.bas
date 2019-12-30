@@ -1,6 +1,6 @@
 FOR i = 5 TO 3
 	a="Hello World"
-	PRINT a
+	PRINT(a)
 NEXT i
-PRINT "END!"
+PRINT("END!")
 END

@@ -1,3 +1,3 @@
-PRINT "Hello\nWorld."
+PRINT("Hello\nWorld.")
 
 END

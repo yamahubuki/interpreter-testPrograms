@@ -1,5 +1,5 @@
 a = 5
-if a > 3 THEN
+IF a > 3 THEN
 	a = 10
 	b = 20
 ELSEIF a = 2 THEN 
@@ -11,5 +11,5 @@ ELSE
 ENDIF
 
 z = 100
-PRINT a
+PRINT(a)
 END
