@@ -1,10 +1,10 @@
-a="Ç†"
-if a="Ç†" THEN a="Ç¢"
-PRINT a
+a="„ÅÇ"
+if a="„ÅÇ" THEN a="„ÅÑ"
+PRINT(a)
 
-b="Ç¢"
-if b<>"Ç¢" THEN b="Ç†"
-PRINT b
+b="„ÅÑ"
+if b<>"„ÅÑ" THEN b="„ÅÇ"
+PRINT(b)
 
 
 END

@@ -7,7 +7,7 @@ FOR a = 1 TO 40
 	ELSEIF flg3=1 THEN
 		flg3=2
 	ELSE
-		PRINT "Fizz"
+		PRINT("Fizz")
 		flg3=0
 		flg=1
 	ENDIF
@@ -21,16 +21,16 @@ FOR a = 1 TO 40
 	ELSEIF flg5=3 THEN
 		flg5=4
 	ELSE
-		PRINT "Buzz"
+		PRINT("Buzz")
 		flg5=0
 		flg=1
 	ENDIF
 
 	IF flg=0 THEN
-		PRINT a
+		PRINT(a)
 	ENDIF
 
-	PRINT "\n"
+	PRINT("\n")
 
 NEXT a
 END

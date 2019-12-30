@@ -8,6 +8,6 @@ ELSE
 	c = 50
 ENDIF
 
-PRINT a
+PRINT(a)
 
 END

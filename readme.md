@@ -1,134 +1,134 @@
 # BASIC Parser Test Programs
 
-## �T�v
+## 概要
 
-- �R�N������I���Ȗځu���H�I�v���O���~���O�v�ō쐬����BASIC����̃C���^�v���^���e�X�g���邽�߂�BASIC�v���O�����ł��B
-- ��{�I�ɂ�STEP2��SyntaxAnalyzer�ȍ~��Ώۂɐ݌v���Ă��܂��B
-�@(STEP1�ł����p�ł��܂����ASTEP1�ł͂����ƌ����I�ȃe�X�g���P�t�@�C���łł���ł��傤�B)
-- �ꉞ�e�X�g�ڈ��������܂����A�e�X�g�v���O�����A���퓮�쌋�ʋ��ɐ��m���E�ԗ�����ۏ؂�����̂ł͂���܂���B
-- �s����ԈႢ������΁A�F�l�����PullRequest�����}���܂��B
-- �����X�V���A�ȉ��Ŕz�z���܂��B
+- ３年次後期選択科目「実践的プログラミング」で作成するBASIC言語のインタプリタをテストするためのBASICプログラムです。
+- 基本的にはSTEP2のSyntaxAnalyzer以降を対象に設計しています。
+　(STEP1でも利用できますが、STEP1ではもっと効率的なテストが１ファイルでできるでしょう。)
+- 一応テスト目安を示しますが、テストプログラム、正常動作結果共に正確性・網羅性を保証するものではありません。
+- 不足や間違いがあれば、皆様からのPullRequestを歓迎します。
+- 随時更新し、以下で配布します。
 	- https://github.com/Yuki-Kochi/interpreter-testPrograms
 
-## �g����
+## 使い方
 
-- main�N���X��args����t�@�C�������󂯎���悤�ɂ��������ŁA�ԍ����ɂ��g�����������B
-- STEP2��SyntaxAnalyzer�̕��́A�t�@�C�����Ɂu-2�v�Ȃǂƃn�C�t���̂����}�ԍ����܂܂��t�@�C����
-�@��΂��Ă��������B(�����́A���̐������Ⴄ�����ŁASyntaxAnalyzer�̃e�X�g�Ƃ��Ăقږ��Ӗ�������ł��B)
-- STEP3�̕��́A�S�Ẵt�@�C�������Ɋm�F���鎖�łł��邾���p�^�[��(���Ƃ���IF�EIFELSE�EELSE)���ԗ��ł���悤�ɂ��Ă������ł��B
-- STEP3�̕��́A���퓮�쌋�ʂ̋L�ڂ̂Ȃ��t�@�C���͔�΂��Ă��������B
-�@�����̃t�@�C���͎��s�ł��܂��񂪁ASTEP2��ExprListNode�Ȃǂ̎������m�F���邽�߂ɐ݂����Ă��܂��B
+- mainクラスでargsからファイル名を受け取れるようにしたうえで、番号順にお使いください。
+- STEP2のSyntaxAnalyzerの方は、ファイル名に「-2」などとハイフンのついた枝番号が含まれるファイルは
+　飛ばしてください。(これらは、中の数字が違うだけで、SyntaxAnalyzerのテストとしてほぼ無意味だからです。)
+- STEP3の方は、全てのファイルを順に確認する事でできるだけパターン(たとえばIF・IFELSE・ELSE)が網羅できるようにしてあるつもりです。
+- STEP3の方は、正常動作結果の記載のないファイルは飛ばしてください。
+　これらのファイルは実行できませんが、STEP2でExprListNodeなどの実装を確認するために設けられています。
 
-## �O��
+## 前提
 
-- �����^�u(\t)��CR(\r)�͓ǂݔ�΂��B
-- ���@�K����<NL>�̋L�q�̂�����ł́A������NL�����e����B
-- ELSE�����O�ȂǁAStmtList�Ƒ��̗v�f�̊Ԃɂ�<NL>��������̂Ƃ��čl����B
-�@(����́A���@�L�q���s���S�Ȃ񂶂�˂����ƍl���Ă���)
-- <ELSE_BLOCK>�ł́A���@�L�q�ɂ͂Ȃ����ӂ����e����B
-�@(ELSE���`���Ƃ����肦�˂����낤�I�Ƃ������̃e�X�g�p�^�[���쐬�҂̍l���ɂ��)
-- \n�E\r�E\"�E\'�̂S��̃G�X�P�[�v�V�[�P���X�����p�ł���B
+- 水平タブ(\t)とCR(\r)は読み飛ばす。
+- 文法規則上<NL>の記述のある個所では、複数個のNLを許容する。
+- ELSE文直前など、StmtListと他の要素の間には<NL>があるものとして考える。
+　(これは、文法記述が不完全なんじゃねえかと考えている)
+- <ELSE_BLOCK>では、文法記述にはないがφを許容する。
+　(ELSEが義務とかありえねえだろう！というこのテストパターン作成者の考えによる)
+- \n・\r・\"・\'の４種のエスケープシーケンスが利用できる。
 
-## �e�e�X�g�v���O�����Ƃ��̑_���E���퓮�쌋��
+## 各テストプログラムとその狙い・正常動作結果
 
-1.��{�̊�{
+1. 基本の基本
 
-- ���g�́uEND�v�̂݁B
-- program��StmtList��Stmt��END�����������ǂ�鎖�AEOF�ŏ������I���ł��鎖�̊m�F�B
+- 中身は「END」のみ。
+- program→StmtList→Stmt→ENDが正しくたどれる事、EOFで処理を終了できる事の確認。
 
-2.NL�Ή�
+2. NL対応
 
-- StmtList��NL�����e����B
-- �����ł́A�O���NL�������END���L�q���Ă���B
+- StmtListはNLを許容する。
+- ここでは、前後にNLを挟んでENDが記述してある。
 
-3.������Stmt
+3. 複数のStmt
 
-- StmtList�Ŗ������[�v���A�����̗v�f(�����ł͑S��END)���擾�E�\���ł��鎖�̊m�F
+- StmtListで無限ループし、複数の要素(ここでは全てEND)を取得・表示できる事の確認
 
-4.�����
+4. 代入文
 
-- �����Ƃ��P���ȕϐ�a�ɐ����������鏈���̊m�F
+- もっとも単純な変数aに整数を代入する処理の確認
 
 5. Hello World
 
-- stmt����̊֐��ďo�ɂ��print�������s�ł��鎖�̊m�F
-- \n�����s�����Ƃ��ĕ\���ł���悤�G�X�P�[�v�������o���Ă��鎖�̊m�F
-- �\������
+- stmtからの関数呼出によりprint文が実行できる事の確認
+- \nを改行文字として表示できるようエスケープ処理が出来ている事の確認
+- 表示結果
 	- Hello
 	- World
 
-6.�l�X�ȗv�f�̑�����Ƃ��̌��ʕ\��
+6. 様々な要素の代入文とその結果表示
 
-- �����E�����E���e�����E�ϐ����A���ӂŎw�肵���ϐ��ɑ�����鏈���̊m�F�B
-- ���̌��ʂ�print�֐��Ő������\���ł��鎖���m�F�B
-- �\������
+- 整数・少数・リテラル・変数を、左辺で指定した変数に代入する処理の確認。
+- その結果をprint関数で正しく表示できる事を確認。
+- 表示結果
 	- 1
 	- 2.3
-	- ����������
+	- あいうえお
 	- 1
 
-7.�֐��ďo���̊m�F
+7. 関数呼出しの確認
 
-- �ˋ�̊֐�myfunction(void)����̒l��ϐ��ɑ�����镶�𐳂������߂ł��Ă��鎖�̊m�F
-- ���̃t�@�C����STEP2�݂̂ŁA�A���s�͕s�B
+- 架空の関数myfunction(void)からの値を変数に代入する文を正しく解釈できている事の確認
+- このファイルはSTEP2のみで、、実行は不可。
 
-8.�֐��ďo���̃l�X�g�̊m�F
+8. 関数呼出しのネストの確認
 
-- �ˋ�̊֐�myfunction()���炳��ɉˋ�̊֐����l�X�g���ČĂсA���ʂ̒l��ϐ��ɑ�����镶�𐳂������߂ł��Ă��鎖�̊m�F
-- ���̃t�@�C����STEP2�݂̂ŁA�A���s�͕s�B
+- 架空の関数myfunction()からさらに架空の関数をネストして呼び、結果の値を変数に代入する文を正しく解釈できている事の確認
+- このファイルはSTEP2のみで、、実行は不可。
 
-9.�����̈��������֐�
+9. 複数の引数を持つ関数
 
-- ExprList����������������A�J���}��؂�̕����̈��������Ă鎖�̊m�F�B
-- ���̃t�@�C����STEP2�݂̂ŁA�A���s�͕s�B
+- ExprListが正しく実装され、カンマ区切りの複数の引数を持てる事の確認。
+- このファイルはSTEP2のみで、、実行は不可。
 
-10.�P����IF��
+10. 単純なIF文
 
-- IF����������������A���s�Ȃ��łP��Stmt�����^�C�v��IF�������������߂ł��鎖�̊m�F�B
-- 10-4�ł́A������̔�r����������������Ă��鎖�̊m�F�B�����u���v���o�͂���Ă���ꍇ�A�������Java��==��!=���Z�q�Ŕ�r���Ă��܂��Ă���\���������B
-- ���s����
+- IFが正しく実装され、改行なしで１つのStmtを持つタイプのIF文が正しく解釈できる事の確認。
+- 10-4では、文字列の比較が正しく実装されている事の確認。もし「あ」が出力されている場合、文字列をJavaの==や!=演算子で比較してしまっている可能性が高い。
+- 実行結果
 	- 10
 		- 10
 	- 10-2
-		- "1"��1��=���ƍl�������10�A
-		- �����l���Ȃ�����1�B
+		- "1"と1が=だと考える方は10、
+		- そう考えない方は1。
 	- 10-3
 		- 2
 	- 10-4
-		- ��
-		- ��
+		- い
+		- い
 
-11.ELSE�̂���IF��
+11. ELSEのあるIF文
 
-- ���s�����܂��Atrue�̏ꍇ��ELSE�̏ꍇ�Ŋe�P����stmt������IF���𐳂������߂ł��Ă��鎖�̊m�F
-- ���s����
+- 改行を挟まず、trueの場合とELSEの場合で各１個ずつのstmtを持つIF文を正しく解釈できている事の確認
+- 実行結果
 	- 11
 		10
 	- 11-2
 		11
 
-12.�u���b�N���܂�IF��
+12. ブロックを含むIF文
 
-- �����̌�ŉ��s���AStmtList������If�������������߂ł��鎖�̊m�F�B
-- ���s����
+- 条件の後で改行し、StmtListを持つIf文が正しく解釈できる事の確認。
+- 実行結果
 	- 12
 		11
 	- 12-2
 		1
 
-13.ELSE�u���b�N���܂�IF��
+13. ELSEブロックを含むIF文
 
-- true�̏ꍇ�AELSE�̏ꍇ�ł��ꂼ��StmtList���܂�IF���𐳂������߂ł��鎖�̊m�F�B
-- ���s����
+- trueの場合、ELSEの場合でそれぞれStmtListを含むIF文を正しく解釈できる事の確認。
+- 実行結果
 	- 13
 		- 30
 	- 13-2
 		- 10
 
-14 ELSEIF���܂�IF��
+14. ELSEIFを含むIF文
 
-- IF�`ELSEIF�`ELSE�𐳂��������ł��鎖�̊m�F
-- ���s����
+- IF～ELSEIF～ELSEを正しく処理できる事の確認
+- 実行結果
 	- 14
 		60
 	- 14-2
@@ -136,10 +136,10 @@
 	- 14-3
 		10
 
-15.WHILE��
+15. WHILE文
 
-- WHILE���������������ł��鎖�̊m�F
-- ���s����
+- WHILE文が正しく処理できる事の確認
+- 実行結果
 	- 15
 		- 0
 		- 1
@@ -150,10 +150,10 @@
 	- 15-2
 		- END!
 
-16.FOR��
+16. FOR文
 
-- FOR���𐳂������߂ł��鎖�̊m�F
-- ���s����
+- FOR文を正しく解釈できる事の確認
+- 実行結果
 	- 16
 		Hello World
 		Hello World
@@ -162,13 +162,13 @@
 	- 16-2
 		END!
 
-17.�O�����DO WHILE��
-18.�O�����DO UNTIL��
-19 �㔻���DO WHILE��
-20 �㔻���DO UNTIL��
+17. 前判定のDO WHILE文
+18. 前判定のDO UNTIL文
+19. 後判定のDO WHILE文
+20. 後判定のDO UNTIL文
 
-- ���ꂼ��̕������������߂ł��Ă��鎖�̊m�F
-- ���s����
+- それぞれの文が正しく解釈できている事の確認
+- 実行結果
 	- 17
 		11
 	- 18
@@ -178,12 +178,12 @@
 	- 20
 		21
 
-21.�J�b�R�E�D�揇�ʂ̂Ȃ��������̌v�Z
+21. カッコ・優先順位のない多項式の計算
 
-- �J�b�R�̂Ȃ��������̉����揜�𐳂������߁E�v�Z�ł��Ă��鎖�̊m�F�B
-- ���̍����珇�Ɍv�Z����ΐ����������𓾂���e�X�g�P�[�X�ƂȂ��Ă���B
-- 21�ł́A-1�̂悤�ȕ����������B���̃p�^�[�����������܂������Ȃ��ꍇ�AExprNode��-����n�܂鐔�𐳂��������ł��Ă��邩�m�F����Ƃ悢�B
-- ���s����
+- カッコのない多項式の加減乗除を正しく解釈・計算できている事の確認。
+- 式の左から順に計算すれば正しい答えを得られるテストケースとなっている。
+- 21では、-1のような負数を扱う。このパターンだけがうまくいかない場合、ExprNodeで-から始まる数を正しく処理できているか確認するとよい。
+- 実行結果
 	- 21
 		- -4
 	- 21-2
@@ -193,20 +193,20 @@
 	- 21-4
 		- 5.0
 
-22. ���̗D�揇�ʂ��l�������v�Z
+22. 式の優先順位を考慮した計算
 
-- �����揜���������Ă���A�D�揇�ʂ��l����K�v�̂��鎮�𐳂������߁E�v�Z�ł��鎖�̊m�F�B
-- ���s����
+- 加減乗除が混ざっており、優先順位を考える必要のある式を正しく解釈・計算できる事の確認。
+- 実行結果
 	- 44
 
-23.�J�b�R�̂��鎮�̌v�Z
+23. カッコのある式の計算
 
-- �J�b�R�Ɖ��Z�̗D�揇�ʂ��l���Ȃ��琳�����������߁E���s�ł��鎖�̊m�F�B
-- ���s����
+- カッコと演算の優先順位を考えながら正しく式を解釈・実行できる事の確認。
+- 実行結果
 	- 4
 
-24.�ԊO�ҁ@FizzBuzz
+24. 番外編　FizzBuzz
 
-- ��ʓI�ȃ��[����FizzBuzz���A����쐬����BASIC�͈̔͂Ŏ��s�ł���悤�ɏ������������̂ł��B
-- ���s����
-	��
+- 一般的なルールのFizzBuzzを、今回作成するBASICの範囲で実行できるように書き直したものです。
+- 実行結果
+	略

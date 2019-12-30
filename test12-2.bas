@@ -3,5 +3,5 @@ if val < 1 THEN
 	val = 10
 	val = val + 1
 ENDIF
-PRINT val
+PRINT(val)
 END
